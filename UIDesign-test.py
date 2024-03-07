@@ -3,7 +3,7 @@ from tkinter import filedialog
 import pandas as pd
 from tkinter import ttk
 
-from function import selectExcel
+from function import selectExcel,dealData
 
 
 class ExcelGUI:
