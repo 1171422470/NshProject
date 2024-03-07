@@ -1,6 +1,7 @@
 # from tkinter import filedialog
 # import tkinter as tk
 import pandas as pd
+from tkinter import messagebox
 # import openpyxl
 #
 # #读取指定的excel表数据，返回excel表内容
@@ -34,7 +35,8 @@ def selectExcel(exAdress, name, value):
 
 
 # 处理数据
-def dealData(exAdress):
+#输入值：文件地址 年份期限
+def dealData(exAdress,Y_date):
     data = getData(exAdress)
     if data is None:
         return None
@@ -46,9 +48,21 @@ def dealData(exAdress):
     data = data[data["贷款余额(元)"] > 0]
     # 贷款期限大于5年的，判断出是按揭贷款
     data[['借款日期', '到期日期', '数据日期']] = data[['借款日期', '到期日期', '数据日期']].astype('int')
-    data = data[(data["到期日期"] - data["借款日期"]) > 50000]
+
+    # data = data[(data["到期日期"] - data["借款日期"]) > 50000]
     # 已经还款3年的贷款
-    data = data[(data["数据日期"] - data["借款日期"]) >= 50000]
+    # data = data[(data["数据日期"] - data["借款日期"]) >= 50000]
+    if Y_date == '一年':
+        data = data[(data["数据日期"] - data["借款日期"]) <= 10000]
+    elif Y_date == '两年':
+        data = data[((data["数据日期"] - data["借款日期"]) <= 20000) & ((data["数据日期"] - data["借款日期"]) > 10000)]
+    elif Y_date == '三年':
+        data = data[((data["数据日期"] - data["借款日期"]) <= 30000) & ((data["数据日期"] - data["借款日期"]) > 20000)]
+    elif Y_date == '四年':
+        data = data[((data["数据日期"] - data["借款日期"]) <= 40000) & ((data["数据日期"] - data["借款日期"]) > 30000)]
+    else:
+        data = data[(data["数据日期"] - data["借款日期"]) > 40000]
+
     # 替换机构号为行名
     data = data.replace({"开户机构": {45500: "营业部", 45501: "辰阳支行", 45502: "沅江路支行", 45505: "城郊支行",
                                       45507: "田湾支行", 45508: "孝坪支行", 45509: "修溪支行", 45510: "伍家湾支行",
@@ -56,7 +70,7 @@ def dealData(exAdress):
                                       45515: "安坪支行", 45516: "大水田支行", 45517: "龙泉岩支行", 45519: "火马冲支行",
                                       45520: "寺前支行", 45521: "小龙门支行", 45522: "锄头坪支行", 45523: "黄溪口支行",
                                       45524: "龙头庵支行", 45525: "后塘支行", 45526: "仙人湾支行", }}).astype(str)
-    print("OK!")
+    messagebox.showinfo("Message", "数据处理完毕！可以导出数据！")
     return data
 
 
