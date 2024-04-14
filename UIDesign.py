@@ -58,17 +58,17 @@ class ExcelGUI:
                                            highlightthickness=2)
         import_ck202312_button.pack(padx=10, pady=10, anchor='nw')
 
-        # 现在贷款余额导入文件
-        import_dk_now_button = tk.Button(self.master, text="3、导入当前贷款余额表",
-                                         command=self.import_dk_now_file,
-                                         relief=tk.RAISED,
-                                         bd=1,
-                                         bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
-                                         highlightthickness=2)
-        import_dk_now_button.pack(padx=10, pady=10, anchor='nw')
+        #现在贷款余额导入文件
+        # import_dk_now_button = tk.Button(self.master, text="3、导入当前贷款余额表",
+        #                                  command=self.import_dk_now_file,
+        #                                  relief=tk.RAISED,
+        #                                  bd=1,
+        #                                  bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
+        #                                  highlightthickness=2)
+        # import_dk_now_button.pack(padx=10, pady=10, anchor='nw')
 
-        # 现在存款余额导入文件
-        import_ck_now_button = tk.Button(self.master, text="4、导入当前存款余额表",
+        #现在存款余额导入文件
+        import_ck_now_button = tk.Button(self.master, text="3、导入当前存款余额表",
                                          command=self.import_ck_now_file,
                                          relief=tk.RAISED,
                                          bd=1,
@@ -78,7 +78,7 @@ class ExcelGUI:
 
 
         # 2023年贷款客户资金归行情况
-        output_ck_dk_2023_button = tk.Button(self.master, text="5、分析数据",
+        output_ck_dk_2023_button = tk.Button(self.master, text="4、分析数据",
                                              command=self.dk_ck_file_analyse,
                                              relief=tk.RAISED,
                                              bd=1,
@@ -87,7 +87,7 @@ class ExcelGUI:
         output_ck_dk_2023_button.pack(padx=10, pady=10, anchor='nw')
 
         # 导出数据
-        output_ck_dk_2023_button = tk.Button(self.master, text="6、导出数据",
+        output_ck_dk_2023_button = tk.Button(self.master, text="5、导出数据",
                                              command=self.dk_ck_export,
                                              relief=tk.RAISED,
                                              bd=1,
@@ -96,17 +96,17 @@ class ExcelGUI:
         output_ck_dk_2023_button.pack(padx=10, pady=10, anchor='nw')
 
         # 返回主界面按钮键
-        return_button = tk.Button(self.master, text="7、返回主界面", command=self.main_window, relief=tk.RAISED, bd=1,
+        return_button = tk.Button(self.master, text="6、返回主界面", command=self.main_window, relief=tk.RAISED, bd=1,
                                   bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
                                   highlightthickness=2)
         return_button.pack(padx=10, pady=10, anchor='nw')
 
     # 贷款存款余额数据分析
     def dk_ck_file_analyse(self):
-        messagebox.showinfo("Message", "点击确定，开始分析数据！")
+        messagebox.showinfo("Message", "点击确定，开始分析数据！数据量较大，可能需要几分钟！")
         self.str.set("")
         #获取2023年12月底贷款数据，使用B-J列
-        dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:J', header=4, dtype={'证件号码': str},
+        dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:J', header=4, dtype={'证件号码': str,"贷款账号":str},
                                     keep_default_na=False)
         #删除不需要的列
         dk202312_df.drop(['贷款期限','剩余天数'],axis=1,inplace=True)
@@ -115,6 +115,7 @@ class ExcelGUI:
         #获取2023年12月底存款数据，使用F-Q列
         ck202312_df = pd.read_excel(self.ck202312, sheet_name=0, usecols='F, Q', header=1,
                                     dtype={'证件号码': str, '年平均': object})
+
         #202312底存款按证件号得到一个透视表
         ck202312_1 = pd.pivot_table(ck202312_df, index=["证件号码"], values=["年平均"], aggfunc=sum)
         #合并2023年底存款和贷款表

@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog
 import pandas as pd
-from tkinter import ttk
+from tkinter import ttk,PhotoImage
 from tkinter import messagebox
-
+from PIL import Image,ImageTk
 from function import selectExcel, dealData, excelOutput
 from datetime import datetime
 class ckAnalysis:
@@ -60,6 +60,7 @@ class ckAnalysis:
         age_date = self.combox.get()  # 获取下拉框值
         self.dataResult = self.DQCKdeal(self.expth, age_date)
         if self.dataResult is not None:
+            messagebox.showinfo("Message", "数据处理成功！")
             self.str.set("恭喜!处理成功。点击步骤3，导出表格。")
         else:
             self.str.set("处理失败！请重试或咨询技术人员。")
@@ -103,9 +104,9 @@ class ckAnalysis:
                                            values=["开户机构","户名","账户余额(元)"],
                                            aggfunc=sum)
 
-        #判断文件是否导入
-        if data is None:
-            return None
+        # #判断文件是否导入
+        if self.GR_result_hz is not None:
+            return 1
 
     # 根据身份证计算年龄
     def calculate_age_from_id_card(self,id_card):

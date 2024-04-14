@@ -2,7 +2,7 @@ import random
 from tkinter import *
 from tkinter.ttk import *
 from PIL import Image,ImageTk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import tkinter as TK
 from tkinter import filedialog
 from UIDesign import ExcelGUI
@@ -142,7 +142,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_label_left_label1(self, parent):
-        label = Label(parent, text="导航栏", anchor="center",background="#14409A" )
+        label = Label(parent, text="导航栏", anchor="center",background="#75c3b3" )
         label.place(x=2, y=46, width=196, height=38)
         return label
 
