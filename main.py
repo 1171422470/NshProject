@@ -14,7 +14,7 @@ class WinGUI(Tk):
         super().__init__()
         self.__win()
         # 创建一个PhotoImage对象，并加载图片文件
-        self.image = Image.open("image/nsh.png")
+        self.image = Image.open("C:\\Users\\xiaoy\\PycharmProjects\\NshProject\\image\\nsh.png")
         self.image = self.image.resize((200, 40))
         self.image = ImageTk.PhotoImage(self.image)
 
