@@ -32,7 +32,7 @@ class ckAnalysis:
         label = tk.Label(frame, text="选择年龄段")
         # 创建下拉框
         combo_box = ttk.Combobox(frame, width=10, exportselection=False)
-        options = ['20周岁以下','20到60周岁','60周岁以上']  # 下拉框赋值
+        options = ['20周岁以下','20到40周岁','40到60周岁','60周岁以上']  # 下拉框赋值
         combo_box.set(options[0])
         combo_box['values'] = options
         self.combox = combo_box
@@ -75,19 +75,23 @@ class ckAnalysis:
         # 只筛选定期，根据科目编码筛选：一年定期：20040103，二年定期：20040104，三年定期：20040105，五年：20040106
         #金额大于五万元
         if date == '20周岁以下':
-            data['Age'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[(data['Age'] < 20) &((data['科目编码'] == 20040103)
+            data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
+            self.result = data[(data['年龄'] < 20) &((data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
-        elif date == '20到60周岁':
-            data['Age'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[(data['Age'] >= 20) & (data['Age'] <= 60) &((data['科目编码'] == 20040103)
+        elif date == '20到40周岁':
+            data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
+            self.result = data[(data['年龄'] >= 20) & (data['年龄'] <= 40) &((data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
-
+        elif date == '40到60周岁':
+            data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
+            self.result = data[(data['年龄'] >= 40) & (data['年龄'] <= 60) &((data['科目编码'] == 20040103)
+            | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
+                               & (data['账户余额(元)'] > 50000)]
         else:
-            data['Age'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[data['Age'] > 60 &((data['科目编码'] == 20040103)
+            data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
+            self.result = data[data['年龄'] > 60 &((data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
 
@@ -100,10 +104,9 @@ class ckAnalysis:
                                                      values=["账户余额(元)"],
                                                      aggfunc=sum)
         # 透视表进行合并,按个人汇总
-        self.GR_result_hz = pd.pivot_table(self.result, index=["证件号码"],
-                                           values=["开户机构","户名","账户余额(元)"],
+        self.GR_result_hz = pd.pivot_table(self.result, index=["证件号码","开户机构","年龄","户名"],
+                                           values=["账户余额(元)"],
                                            aggfunc=sum)
-
         # #判断文件是否导入
         if self.GR_result_hz is not None:
             return 1
