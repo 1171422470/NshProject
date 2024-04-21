@@ -226,7 +226,7 @@ class ExcelGUI:
         label = tk.Label(frame, text="选择年限")
         # 创建下拉框
         combo_box = ttk.Combobox(frame, width=10, exportselection=False)
-        options = ['一年', '两年', '三年', '四年', '五年']  # 下拉框赋值
+        options = ['一年', '两年', '三年', '四年', '五年及以上']  # 下拉框赋值
         combo_box.set(options[0])
         combo_box['values'] = options
         self.combox = combo_box
