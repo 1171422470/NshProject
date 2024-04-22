@@ -211,7 +211,7 @@ class WinGUI(Tk):
         # 获取当前时间
         now = datetime.datetime.now()
         # 格式化时间
-        formatted_time = now.strftime("%Y年%m月%d日")
+        formatted_time = now.strftime("%Y-%m-%d")
         return formatted_time
 
     # def __tk_frame_main_frame(self,parent):

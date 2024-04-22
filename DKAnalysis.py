@@ -35,7 +35,7 @@ class DKAnalysis:
                                         highlightthickness=2)
         ZJGH_analyse_button.pack(padx=10, pady=10, anchor='nw')
         # 近5年有贷款往来，现在已经结清了的客户
-        LSKH_analyse_button = tk.Button(self.master, text="3、通过近五年的贷款数据，分析流失客户。",
+        LSKH_analyse_button = tk.Button(self.master, text="3、通过近五年的贷款数据，分析流失客户",
                                         command=self.DKAnalysis_LSKH,
                                         relief=tk.RAISED,
                                         bd=1,
