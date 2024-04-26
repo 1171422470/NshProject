@@ -45,7 +45,7 @@ def LSKH_yjq_import_file(self):
 
 
 # 分析数据
-def LSKH_analysis(self):
+def LSKH_analysis(self,Y_date):
     # 清空页面
     if self.LSKH_wjq_addr == '':
         messagebox.showinfo("Message", "未选中文件，请点击步骤2！")
@@ -79,7 +79,7 @@ def LSKH_analysis(self):
         # 删除在未结清贷款中的客户
         result_date = yjq_data[~yjq_data["注册号码"].isin(wjq_data["注册号码"])]
 
-        Y_date = self.LSKH_combox.get()  # 获取下拉框值
+        # Y_date = self.LSKH_combox.get()  # 获取下拉框值
         if Y_date == '二年及以上':
             result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]).dt.year <= now.year - 2]
         elif Y_date == '三年及以上':

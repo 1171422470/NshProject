@@ -14,50 +14,49 @@ class ckAnalysis:
         self.master.geometry("800x500")  # 固定窗口大小
         self.expth = ''  # 初始化导入文件路径字段
         self.str = tk.StringVar() #初始化
-        self.UI()
+        # self.UI()
     #界面
-    def UI(self):
-        # 添加标签和输入框
-        frame = tk.Frame(self.master, width=600)  # 用frame标签
-        #文件导入按键
-        manalyse_button = tk.Button(frame, text="1,选择定期存款余额表", command=self.import_file,
-                                      relief=tk.RAISED,
-                                      bd=1,
-                                      bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
-                                      highlightthickness=2)
-        manalyse_button.pack(padx=10, pady=10, anchor='nw',side=tk.LEFT)
-
-
-        # 创建一个文本标签，并设置其显示的文本
-        label = tk.Label(frame, text="选择年龄段")
-        # 创建下拉框
-        combo_box = ttk.Combobox(frame, width=10, exportselection=False)
-        options = ['20周岁以下','20到40周岁','40到60周岁','60周岁以上']  # 下拉框赋值
-        combo_box.set(options[0])
-        combo_box['values'] = options
-        self.combox = combo_box
-        label.pack(side=tk.LEFT, padx=5)
-        combo_box.pack(side=tk.LEFT, padx=5)
-        frame.pack(padx=1, pady=1, anchor='nw')
+    # def UI(self):
+    #     # 添加标签和输入框
+    #     frame = tk.Frame(self.master, width=600)  # 用frame标签
+    #     #文件导入按键
+    #     manalyse_button = tk.Button(frame, text="1,选择定期存款余额表", command=self.import_file,
+    #                                   relief=tk.RAISED,
+    #                                   bd=1,
+    #                                   bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
+    #                                   highlightthickness=2)
+    #     manalyse_button.pack(padx=10, pady=10, anchor='nw',side=tk.LEFT)
+    #
+    #
+    #     # 创建一个文本标签，并设置其显示的文本
+    #     label = tk.Label(frame, text="选择年龄段")
+    #     # 创建下拉框
+    #     combo_box = ttk.Combobox(frame, width=10, exportselection=False)
+    #     options = ['20周岁以下','20到40周岁','40到60周岁','60周岁以上']  # 下拉框赋值
+    #     combo_box.set(options[0])
+    #     combo_box['values'] = options
+    #     self.combox = combo_box
+    #     label.pack(side=tk.LEFT, padx=5)
+    #     combo_box.pack(side=tk.LEFT, padx=5)
+    #     frame.pack(padx=1, pady=1, anchor='nw')
 
         #设置分析数据按键
         # 定期存款分析
-        output_button = tk.Button(self.master, text="2,分析数据",
-                                             command=self.DQCKAnalysis,
-                                             relief=tk.RAISED,
-                                             bd=1,
-                                             bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
-                                             highlightthickness=2)
-        output_button.pack(padx=10, pady=10, anchor='nw')
+        # output_button = tk.Button(self.master, text="2,分析数据",
+        #                                      command=self.DQCKAnalysis,
+        #                                      relief=tk.RAISED,
+        #                                      bd=1,
+        #                                      bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
+        #                                      highlightthickness=2)
+        # output_button.pack(padx=10, pady=10, anchor='nw')
 
         #导出数据
-        export_button = tk.Button(self.master, text="3、导出表格", command=self.export_file, relief=tk.RAISED, bd=1,
-                                  bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
-                                  highlightthickness=2)
-        export_button.pack(padx=10, pady=10, anchor='nw')
+        # export_button = tk.Button(self.master, text="3、导出表格", command=self.export_file, relief=tk.RAISED, bd=1,
+        #                           bg='lightblue', fg='black', padx=1, pady=1, borderwidth=1, border='0',
+        #                           highlightthickness=2)
+        # export_button.pack(padx=10, pady=10, anchor='nw')
     # 定期存款数据分析
-    def DQCKAnalysis(self):
-        age_date = self.combox.get()  # 获取下拉框值
+    def DQCKAnalysis(self,age_date):
         self.dataResult = self.DQCKdeal(self.expth, age_date)
         if self.dataResult is not None:
             messagebox.showinfo("Message", "数据处理成功！")

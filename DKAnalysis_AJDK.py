@@ -27,12 +27,11 @@ def AJDK_import_file(self):
             messagebox.showinfo("Message", "选中：" + self.expth + "  请点击步骤2")
 
 # 处理分析数据
-def AJDK_analyse_excel(self):
+def AJDK_analyse_excel(self,Y_date):
     if self.expth == '':
         messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
         return None
     else:
-        Y_date = self.AJDK_combox.get()  #获取下拉框值
         data = pd.read_excel(self.expth, sheet_name=0, usecols='A:H, L, O:P, S', header=0, dtype=str)
         # 贷款形态为正常
         data = data[data["五级分类状态"] == "1-正常"]
