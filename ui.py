@@ -3,7 +3,7 @@ import os
 import random
 from tkinter import *
 from tkinter.ttk import *
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 from tkinter import messagebox, ttk
 import tkinter as TK
 from tkinter import filedialog
@@ -14,6 +14,8 @@ from tkinter import filedialog
 import pandas as pd
 from io import BytesIO
 import datetime
+
+
 class WinGUI(Tk):
     def __init__(self):
         super().__init__()
@@ -27,11 +29,11 @@ class WinGUI(Tk):
         image_data = Image.open(BytesIO(base64.b64decode(logoImage)))
 
         path = os.getcwd()
-        with open(path+'\\nsh.png','wb') as f :
+        with open(path + '\\nsh.png', 'wb') as f:
             image_data.save(f, format="PNG")
             f.close()
         #展示logo
-        self.image = Image.open(path+'\\nsh.png')
+        self.image = Image.open(path + '\\nsh.png')
         self.image = self.image.resize((200, 40))
         self.image = ImageTk.PhotoImage(self.image)
 
@@ -73,6 +75,7 @@ class WinGUI(Tk):
         self.tk_button_dk_f_button2 = self.__tk_button_dk_f_button2(self.tk_label_frame_labelframe2)
         self.tk_button_dk_f_button3 = self.__tk_button_dk_f_button3(self.tk_label_frame_labelframe2)
         self.tk_button_dk_f_button4 = self.__tk_button_dk_f_button4(self.tk_label_frame_labelframe2)
+        self.tk_button_dk_f_button5 = self.__tk_button_dk_f_button5(self.tk_label_frame_labelframe2)
 
         #按揭贷款分析
         self.tk_button_ajdk_button1 = self.__tk_button_ajdk_button1(self.tk_label_frame_labelframe2)
@@ -89,7 +92,8 @@ class WinGUI(Tk):
         self.tk_button_zjgh_button4 = self.__tk_button_zjgh_button4(self.tk_label_frame_labelframe2)
         self.tk_button_zjgh_button5 = self.__tk_button_zjgh_button5(self.tk_label_frame_labelframe2)
         self.tk_button_zjgh_button6 = self.__tk_button_zjgh_button6(self.tk_label_frame_labelframe2)
-        #近5年有贷款往来，现在已经结清了的客户
+
+        # 近5年有贷款往来，现在已经结清了的客户
         self.tk_button_lskh_button1 = self.__tk_button_lskh_button1(self.tk_label_frame_labelframe2)
         self.tk_button_lskh_button2 = self.__tk_button_lskh_button2(self.tk_label_frame_labelframe2)
         self.tk_button_lskh_button3 = self.__tk_button_lskh_button3(self.tk_label_frame_labelframe2)
@@ -97,6 +101,14 @@ class WinGUI(Tk):
         self.tk_button_lskh_button5 = self.__tk_button_lskh_button5(self.tk_label_frame_labelframe2)
         self.tk_label_lskh_label1 = self.__tk_label_lskh_label1(self.tk_label_frame_labelframe2)
         self.tk_select_box_lskh_select1 = self.__tk_select_box_lskh_select1(self.tk_label_frame_labelframe2)
+
+        # 贷款测算
+        self.tk_button_dkcs_button1 = self.__tk_button_dkcs_button1(self.tk_label_frame_labelframe2)
+        self.tk_button_dkcs_button2 = self.__tk_button_dkcs_button2(self.tk_label_frame_labelframe2)
+        self.tk_button_dkcs_button3 = self.__tk_button_dkcs_button3(self.tk_label_frame_labelframe2)
+        self.tk_button_dkcs_button4 = self.__tk_button_dkcs_button4(self.tk_label_frame_labelframe2)
+        self.tk_button_dkcs_button5 = self.__tk_button_dkcs_button5(self.tk_label_frame_labelframe2)
+
     def __win(self):
         self.title("数据分析")
         # 设置窗口大小、居中
@@ -154,7 +166,7 @@ class WinGUI(Tk):
         return frame
 
     def __tk_button_top_button1(self, parent):
-        btn = Button(parent, text="工具", takefocus=False,)
+        btn = Button(parent, text="工具", takefocus=False, )
         btn.place(x=340, y=18, width=92, height=40)
         return btn
 
@@ -199,7 +211,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_label_left_label1(self, parent):
-        label = Label(parent, text="导航栏", anchor="center",background="#75c3b3" )
+        label = Label(parent, text="导航栏", anchor="center", background="#75c3b3")
         label.place(x=2, y=46, width=196, height=38)
         return label
 
@@ -239,7 +251,7 @@ class WinGUI(Tk):
         return frame
 
     def __tk_label_botton_label1(self, parent):
-        label = Label(parent, text="日 期: "+self.update_time(), anchor="center", )
+        label = Label(parent, text="日 期: " + self.update_time(), anchor="center", )
         label.place(x=0, y=10, width=200, height=21)
         return label
 
@@ -247,6 +259,7 @@ class WinGUI(Tk):
         label = Label(parent, text="", anchor="center", )
         label.place()
         return label
+
     #获取时间
     def update_time(self):
         # 获取当前时间
@@ -256,22 +269,20 @@ class WinGUI(Tk):
         return formatted_time
 
     def __tk_label_frame_labelframe1(self, parent):
-        frame = LabelFrame(parent, text="存款分析", )
+        frame = LabelFrame(parent, text="存款数据分析", )
         return frame
 
     def __tk_button_ck_button1(self, parent):
-        btn = Button(parent, text="1.选择定期存款余额表", takefocus=False,)
+        btn = Button(parent, text="1.选择存款余额表", takefocus=False, )
         return btn
-
 
     def __tk_button_ck_button2(self, parent):
         btn = Button(parent, text="2.分析数据", takefocus=False)
         return btn
 
     def __tk_button_ck_button3(self, parent):
-        btn = Button(parent, text="3.导出数据", takefocus=False,)
+        btn = Button(parent, text="3.导出数据", takefocus=False, )
         return btn
-
 
     def __tk_select_box_ck_select1(self, parent):
         cb = Combobox(parent, state="readonly", )
@@ -279,18 +290,16 @@ class WinGUI(Tk):
         cb.set('20周岁以下')
         return cb
 
-
     def __tk_label_ck_label1(self, parent):
         label = Label(parent, text="选择年龄段", anchor="center", )
         return label
-
 
     def __tk_button_ck_button4(self, parent):
         btn = Button(parent, text="返回上级菜单", takefocus=False, )
         return btn
 
     def __tk_button_ck_f_button1(self, parent):
-        btn = Button(parent, text="定期存款分析", takefocus=False, )
+        btn = Button(parent, text="1、定期存款分析", takefocus=False, )
         return btn
 
     def __tk_button_ck_f_button2(self, parent):
@@ -298,23 +307,27 @@ class WinGUI(Tk):
         return btn
 
     def __tk_label_frame_labelframe2(self, parent):
-        frame = LabelFrame(parent, text="贷款分析", )
+        frame = LabelFrame(parent, text="贷款数据分析", )
         return frame
 
     def __tk_button_dk_f_button1(self, parent):
-        btn = Button(parent, text="正常类按揭贷款数据分析", takefocus=False, )
+        btn = Button(parent, text="1、正常类按揭贷款数据分析", takefocus=False, )
         return btn
 
     def __tk_button_dk_f_button2(self, parent):
-        btn = Button(parent, text="2023年贷款客户资金归行情况分析", takefocus=False, )
+        btn = Button(parent, text="2、2023年贷款客户资金归行情况分析", takefocus=False, )
         return btn
 
     def __tk_button_dk_f_button3(self, parent):
-        btn = Button(parent, text="通过近五年的贷款数据，分析流失客户", takefocus=False, )
+        btn = Button(parent, text="3、通过近五年的贷款数据，分析流失客户", takefocus=False, )
         return btn
 
     def __tk_button_dk_f_button4(self, parent):
-        btn = Button(parent, text="退出", takefocus=False, )
+        btn = Button(parent, text="4、贷款测算", takefocus=False, )
+        return btn
+
+    def __tk_button_dk_f_button5(self, parent):
+        btn = Button(parent, text="5、退出", takefocus=False, )
         return btn
 
     def __tk_button_ajdk_button1(self, parent):
@@ -330,7 +343,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_button_ajdk_button4(self, parent):
-        btn = Button(parent, text="返回主界面", takefocus=False, )
+        btn = Button(parent, text="返回上一级", takefocus=False, )
         return btn
 
     def __tk_select_box_ajdk_select1(self, parent):
@@ -352,7 +365,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_button_zjgh_button3(self, parent):
-        btn = Button(parent, text="3.导入当前存款余额表", takefocus=False, )
+        btn = Button(parent, text="3.导入当前存款余额表（数据来源：ODS）", takefocus=False, )
         return btn
 
     def __tk_button_zjgh_button4(self, parent):
@@ -364,31 +377,59 @@ class WinGUI(Tk):
         return btn
 
     def __tk_button_zjgh_button6(self, parent):
-        btn = Button(parent, text="返回主界面", takefocus=False, )
+        btn = Button(parent, text="返回上一级", takefocus=False, )
         return btn
-    def __tk_button_lskh_button1(self,parent):
-        btn = Button(parent, text="1.选择已结清贷款明细文件（数据来源：信贷查询系统）", takefocus=False,)
+
+    def __tk_button_lskh_button1(self, parent):
+        btn = Button(parent, text="1.选择已结清贷款明细文件（数据来源：信贷查询系统）", takefocus=False, )
         return btn
-    def __tk_button_lskh_button2(self,parent):
-        btn = Button(parent, text="2.选择未结清贷款明细文件（数据来源：信贷查询系统）", takefocus=False,)
+
+    def __tk_button_lskh_button2(self, parent):
+        btn = Button(parent, text="2.选择未结清贷款明细文件（数据来源：信贷查询系统）", takefocus=False, )
         return btn
-    def __tk_button_lskh_button3(self,parent):
-        btn = Button(parent, text="3.分析数据", takefocus=False,)
+
+    def __tk_button_lskh_button3(self, parent):
+        btn = Button(parent, text="3.分析数据", takefocus=False, )
         return btn
-    def __tk_button_lskh_button4(self,parent):
-        btn = Button(parent, text="4.导出数据", takefocus=False,)
+
+    def __tk_button_lskh_button4(self, parent):
+        btn = Button(parent, text="4.导出数据", takefocus=False, )
         return btn
-    def __tk_button_lskh_button5(self,parent):
-        btn = Button(parent, text="返回主界面", takefocus=False,)
+
+    def __tk_button_lskh_button5(self, parent):
+        btn = Button(parent, text="返回上一级", takefocus=False, )
         return btn
-    def __tk_label_lskh_label1(self,parent):
-        label = Label(parent,text="未发生贷款业务时长",anchor="center", )
+
+    def __tk_label_lskh_label1(self, parent):
+        label = Label(parent, text="未发生贷款业务时长", anchor="center", )
         return label
-    def __tk_select_box_lskh_select1(self,parent):
+
+    def __tk_select_box_lskh_select1(self, parent):
         cb = Combobox(parent, state="readonly", )
-        cb['values'] = ("一年及以上","二年及以上","三年及以上","四年及以上","五年")
+        cb['values'] = ("一年及以上", "二年及以上", "三年及以上", "四年及以上", "五年")
         cb.set('一年及以上')
         return cb
+
+    def __tk_button_dkcs_button1(self, parent):
+        btn = Button(parent, text="1.选择贷款余额表（数据来源：ODS）", takefocus=False, )
+        return btn
+
+    def __tk_button_dkcs_button2(self, parent):
+        btn = Button(parent, text="2.选择贷款回收登记薄（数据来源：ODS）", takefocus=False, )
+        return btn
+
+    def __tk_button_dkcs_button3(self, parent):
+        btn = Button(parent, text="3.分析数据", takefocus=False, )
+        return btn
+
+    def __tk_button_dkcs_button4(self, parent):
+        btn = Button(parent, text="4.导出数据", takefocus=False, )
+        return btn
+
+    def __tk_button_dkcs_button5(self, parent):
+        btn = Button(parent, text="返回上一级", takefocus=False, )
+        return btn
+
 class Win(WinGUI):
     def __init__(self, controller):
         self.ctl = controller
@@ -399,19 +440,18 @@ class Win(WinGUI):
 
     #绑定事件
     def __event_bind(self):
-
         #点击导航栏存款分析按钮
         self.tk_button_left_button2.bind('<Button>', self.ctl.ckfx)
         #点击存款分析界面定期存款分析按钮
         self.tk_button_ck_f_button1.bind('<Button>', self.ctl.ck_dqkc)
         #点击存款分析界面菜单退出按钮
-        self.tk_button_ck_f_button2.bind('<Button>',self.ctl.ck_exit)
+        self.tk_button_ck_f_button2.bind('<Button>', self.ctl.ck_exit)
         #点击存款界面定期存款分析返回上级菜单按钮
         self.tk_button_ck_button4.bind('<Button>', self.ctl.ckfx)
         #存款分析按钮
-        self.tk_button_ck_button2.bind('<Button>',self.ctl.ck_button2)
+        self.tk_button_ck_button2.bind('<Button>', self.ctl.ck_button2)
         #存款导入文件
-        self.tk_button_ck_button1.bind('<Button>',self.ctl.ck_button1)
+        self.tk_button_ck_button1.bind('<Button>', self.ctl.ck_button1)
         # 存款导出文件
         self.tk_button_ck_button3.bind('<Button>', self.ctl.ck_button3)
 
@@ -419,7 +459,7 @@ class Win(WinGUI):
         # 点击导航栏贷款分析按钮
         self.tk_button_left_button1.bind('<Button>', self.ctl.dkfx)
         #退出
-        self.tk_button_dk_f_button4.bind('<Button>', self.ctl.dk_exit)
+        self.tk_button_dk_f_button5.bind('<Button>', self.ctl.dk_exit)
         # 1.正常类按揭贷款数据分析
         self.tk_button_dk_f_button1.bind('<Button>', self.ctl.dk_ajdk)
         self.tk_button_ajdk_button1.bind('<Button>', self.ctl.DKAnalysis_AJDK_import_file)
@@ -428,20 +468,29 @@ class Win(WinGUI):
         self.tk_button_ajdk_button4.bind('<Button>', self.ctl.dkfx)
         #2.2023年贷款客户资金归行情况分析
         self.tk_button_dk_f_button2.bind('<Button>', self.ctl.dk_zjgh)
-        self.tk_button_zjgh_button6.bind('<Button>',self.ctl.dkfx)
-        self.tk_button_zjgh_button1.bind('<Button>',self.ctl.DKAnalysis_ZJGH_import_dk202312_file)
-        self.tk_button_zjgh_button2.bind('<Button>',self.ctl.DKAnalysis_ZJGH_import_ck202312_file)
+        self.tk_button_zjgh_button6.bind('<Button>', self.ctl.dkfx)
+        self.tk_button_zjgh_button1.bind('<Button>', self.ctl.DKAnalysis_ZJGH_import_dk202312_file)
+        self.tk_button_zjgh_button2.bind('<Button>', self.ctl.DKAnalysis_ZJGH_import_ck202312_file)
         self.tk_button_zjgh_button3.bind('<Button>', self.ctl.DKAnalysis_ZJGH_import_ck_now_file)
-        self.tk_button_zjgh_button4.bind('<Button>',self.ctl.DKAnalysis_ZJGH_dk_ck_file_analyse)
-        self.tk_button_zjgh_button5.bind('<Button>',self.ctl.DKAnalysis_ZJGH_export)
-        #3.近5年有贷款往来，现在已经结清了的客户
+        self.tk_button_zjgh_button4.bind('<Button>', self.ctl.DKAnalysis_ZJGH_dk_ck_file_analyse)
+        self.tk_button_zjgh_button5.bind('<Button>', self.ctl.DKAnalysis_ZJGH_export)
+
+        # 3.近5年有贷款往来，现在已经结清了的客户
         self.tk_button_dk_f_button3.bind('<Button>', self.ctl.dk_lskh)
-        self.tk_button_lskh_button5.bind('<Button>',self.ctl.dkfx)
-        self.tk_button_lskh_button1.bind('<Button>',self.ctl.DKAnalysis_LSKH_yjq_import_file)
-        self.tk_button_lskh_button2.bind('<Button>',self.ctl.DKAnalysis_LSKH_wjq_import_file)
-        self.tk_button_lskh_button3.bind('<Button>',self.ctl.DKAnalysis_LSKH_analysis)
-        self.tk_button_lskh_button4.bind('<Button>',self.ctl.DKAnalysis_LSKH_export)
-        pass
-    def __style_config(self):
+        self.tk_button_lskh_button5.bind('<Button>', self.ctl.dkfx)
+        self.tk_button_lskh_button1.bind('<Button>', self.ctl.DKAnalysis_LSKH_yjq_import_file)
+        self.tk_button_lskh_button2.bind('<Button>', self.ctl.DKAnalysis_LSKH_wjq_import_file)
+        self.tk_button_lskh_button3.bind('<Button>', self.ctl.DKAnalysis_LSKH_analysis)
+        self.tk_button_lskh_button4.bind('<Button>', self.ctl.DKAnalysis_LSKH_export)
+
+        # 4.贷款测算
+        self.tk_button_dk_f_button4.bind('<Button>', self.ctl.dk_dkcs)
+        self.tk_button_dkcs_button5.bind('<Button>', self.ctl.dkfx)
+        self.tk_button_dkcs_button1.bind('<Button>', self.ctl.DKAnalysis_DKCS_DKYEB_import_file)
+        self.tk_button_dkcs_button2.bind('<Button>', self.ctl.DKAnalysis_DKCS_DKHSDJB_import_file)
+        self.tk_button_dkcs_button3.bind('<Button>', self.ctl.DKAnalysis_DKCS_analyse_excel)
+        self.tk_button_dkcs_button4.bind('<Button>', self.ctl.DKAnalysis_DKCS_export_file)
         pass
 
+    def __style_config(self):
+        pass

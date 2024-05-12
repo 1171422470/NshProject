@@ -32,6 +32,7 @@ class Controller:
         self.ui.tk_button_dk_f_button2.place_forget()
         self.ui.tk_button_dk_f_button3.place_forget()
         self.ui.tk_button_dk_f_button4.place_forget()
+        self.ui.tk_button_dk_f_button5.place_forget()
 
         self.ui.tk_button_ajdk_button1.place_forget()
         self.ui.tk_button_ajdk_button2.place_forget()
@@ -54,6 +55,12 @@ class Controller:
         self.ui.tk_button_lskh_button5.place_forget()
         self.ui.tk_label_lskh_label1.place_forget()
         self.ui.tk_select_box_lskh_select1.place_forget()
+
+        self.ui.tk_button_dkcs_button1.place_forget()
+        self.ui.tk_button_dkcs_button2.place_forget()
+        self.ui.tk_button_dkcs_button3.place_forget()
+        self.ui.tk_button_dkcs_button4.place_forget()
+        self.ui.tk_button_dkcs_button5.place_forget()
     # 绑定存款分析按钮
     def ckfx(self, evt):
         self.hide()
@@ -64,10 +71,11 @@ class Controller:
     def dkfx(self, evt):
         self.hide()
         self.ui.tk_label_frame_labelframe2.place(x=225, y=85, width=561, height=386)
-        self.ui.tk_button_dk_f_button1.place(x=30, y=8, width=230, height=40)
-        self.ui.tk_button_dk_f_button2.place(x=30, y=58, width=230, height=40)
-        self.ui.tk_button_dk_f_button3.place(x=30, y=108, width=230, height=40)
-        self.ui.tk_button_dk_f_button4.place(x=30, y=300, width=230, height=30)
+        self.ui.tk_button_dk_f_button1.place(x=30, y=8, width=250, height=40)
+        self.ui.tk_button_dk_f_button2.place(x=30, y=58, width=250, height=40)
+        self.ui.tk_button_dk_f_button3.place(x=30, y=108, width=250, height=40)
+        self.ui.tk_button_dk_f_button4.place(x=30, y=158, width=250, height=40)
+        self.ui.tk_button_dk_f_button5.place(x=30, y=300, width=250, height=30)
 
     #定期存款余额表分析
     def ck_dqkc(self,evt):
@@ -156,3 +164,24 @@ class Controller:
     def DKAnalysis_LSKH_export(self,evt):
         self.ui.dk.DKAnalysis_LSKH_export()
 
+    # 贷款测算
+    def dk_dkcs(self, evt):
+        self.hide()
+        self.ui.tk_label_frame_labelframe2.place(x=225, y=85, width=561, height=386)
+        self.ui.tk_button_dkcs_button1.place(x=0, y=8, width=310, height=30)
+        self.ui.tk_button_dkcs_button2.place(x=0, y=58, width=310, height=30)
+        self.ui.tk_button_dkcs_button3.place(x=0, y=108, width=121, height=30)
+        self.ui.tk_button_dkcs_button4.place(x=0, y=158, width=121, height=30)
+        self.ui.tk_button_dkcs_button5.place(x=0, y=300, width=121, height=30)
+
+    def DKAnalysis_DKCS_DKYEB_import_file(self, evt):
+        self.ui.dk.DKAnalysis_DKCS_DKYEB_import_file()
+
+    def DKAnalysis_DKCS_DKHSDJB_import_file(self, evt):
+        self.ui.dk.DKAnalysis_DKCS_DKHSDJB_import_file()
+
+    def DKAnalysis_DKCS_analyse_excel(self, evt):
+        self.ui.dk.DKAnalysis_DKCS_analyse_excel()
+
+    def DKAnalysis_DKCS_export_file(self, evt):
+        self.ui.dk.DKAnalysis_DKCS_export_file()

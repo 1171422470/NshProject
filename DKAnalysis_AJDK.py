@@ -26,8 +26,9 @@ def AJDK_import_file(self):
         else:
             messagebox.showinfo("Message", "选中：" + self.expth + "  请点击步骤2")
 
+
 # 处理分析数据
-def AJDK_analyse_excel(self,Y_date):
+def AJDK_analyse_excel(self, Y_date):
     if self.expth == '':
         messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
         return None
@@ -36,7 +37,7 @@ def AJDK_analyse_excel(self,Y_date):
         # 贷款形态为正常
         data = data[data["五级分类状态"] == "1-正常"]
         # 剔除无用数据
-        data.drop([len(data)-1], inplace=True)
+        data.drop([len(data) - 1], inplace=True)
         # 贷款期限大于5年的，判断出是按揭贷款
         data = data[
             (pd.to_datetime(data["到期日期"]) - pd.to_datetime(data["贷款日期"])) > datetime.timedelta(days=365 * 5)]
@@ -55,9 +56,7 @@ def AJDK_analyse_excel(self,Y_date):
             data = data[now - pd.to_datetime(data["贷款日期"]) >= datetime.timedelta(days=365 * 5)]
         # 计算可用贷款额度
         data.insert(loc=6, column="可用贷款余额",
-                    value=data['贷款金额'].str.replace(',', '').astype(float) - data['本金余额'].str.replace(',',
-                                                                                                             '').astype(
-                        float))
+                    value=data['贷款金额'].str.replace(',', '').astype(float) - data['本金余额'].str.replace(',', '').astype(float))
 
         self.AJDK_dataResult = data
 
@@ -87,4 +86,3 @@ def AJDK_export_file(self):
         df2.to_excel(writer, sheet_name='汇总', index=False)
         writer.close()
         messagebox.showinfo("Message", "数据导出成功，位置在：" + export_path)
-

@@ -7,6 +7,7 @@ from DKAnalysis_AJDK import AJDK_import_file, AJDK_analyse_excel, AJDK_export_fi
 from DKAnalysis_ZJGH import (ZJGH_import_dk202312_file, ZJGH_import_ck202312_file, ZJGH_import_ck_now_file,
                              ZJGH_dk_ck_file_analyse, ZJGH_export)
 from DKAnalysis_LSKH import LSKH_wjq_import_file, LSKH_yjq_import_file, LSKH_analysis, LSKH_export
+from DKAnalysis_DKCS import DKCS_DKYEB_import_file, DKCS_DKHSDJB_import_file, DKCS_analyse_excel, DKCS_export_file
 
 from function import selectExcel, dealData, excelOutput
 
@@ -63,6 +64,22 @@ class DKAnalysis:
     # 导出结果
     def DKAnalysis_LSKH_export(self):
         LSKH_export(self)
+    # 贷款测算
+    # 导入贷款余额表
+    def DKAnalysis_DKCS_DKYEB_import_file(self):
+        DKCS_DKYEB_import_file(self)
+
+    # 导入贷款回收登记薄
+    def DKAnalysis_DKCS_DKHSDJB_import_file(self):
+        DKCS_DKHSDJB_import_file(self)
+
+    # 分析数据
+    def DKAnalysis_DKCS_analyse_excel(self):
+        DKCS_analyse_excel(self)
+
+    # 导出数据
+    def DKAnalysis_DKCS_export_file(self):
+        DKCS_export_file(self)
     def __init__(self, master):
         self.master = master
         # 按揭贷款数据分析
@@ -80,3 +97,8 @@ class DKAnalysis:
         self.LSKH_wjq_addr = ''  # 初始化未结清贷款明细路径
         self.LSKH_yjq_addr = ''  # 初始化已结清贷款明细路径
         self.LSKH_result_data = 0   # 初始化生产的结果
+        # 贷款测算
+        self.DKCS_dkyeb_addr = ''  # 初始化贷款余额表明细路径
+        self.DKCS_dkhsdjb_addr = ''  # 初始化贷款回收登记簿路径
+        self.LSKH_result_data = 0  # 初始化生产的结果
+
