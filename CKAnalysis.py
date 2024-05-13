@@ -75,22 +75,22 @@ class ckAnalysis:
         #金额大于五万元
         if date == '20周岁以下':
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[(data['年龄'] < 20) &((data['科目编码'] == 20040103)
+            self.result = data[(data['年龄'] < 20) &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
         elif date == '20到40周岁':
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[(data['年龄'] >= 20) & (data['年龄'] <= 40) &((data['科目编码'] == 20040103)
+            self.result = data[(data['年龄'] >= 20) & (data['年龄'] <= 40) &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
         elif date == '40到60周岁':
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[(data['年龄'] >= 40) & (data['年龄'] <= 60) &((data['科目编码'] == 20040103)
+            self.result = data[(data['年龄'] >= 40) & (data['年龄'] <= 60) &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
         else:
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[data['年龄'] > 60 &((data['科目编码'] == 20040103)
+            self.result = data[data['年龄'] > 60 &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
 
@@ -104,7 +104,7 @@ class ckAnalysis:
                                                      aggfunc=sum)
         # 透视表进行合并,按个人汇总
         self.GR_result_hz = pd.pivot_table(self.result, index=["证件号码","开户机构","年龄","户名"],
-                                           values=["账户余额(元)"],
+                                           values=["定期余额(大于5万元)"],
                                            aggfunc=sum)
         # #判断文件是否导入
         if self.GR_result_hz is not None:

@@ -6,6 +6,7 @@ import pandas as pd
 from tkinter import ttk
 from tkinter import messagebox
 import datetime
+from dateutil.relativedelta import relativedelta
 
 
 # 导入未结清数据源文件
@@ -81,13 +82,13 @@ def LSKH_analysis(self,Y_date):
 
         # Y_date = self.LSKH_combox.get()  # 获取下拉框值
         if Y_date == '二年及以上':
-            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]).dt.year <= now.year - 2]
+            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]) <= now - relativedelta(years=2)]
         elif Y_date == '三年及以上':
-            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]).dt.year <= now.year - 3]
+            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]) <= now - relativedelta(years=3)]
         elif Y_date == '四年及以上':
-            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]).dt.year <= now.year - 4]
-        elif Y_date == '五年':
-            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]).dt.year <= now.year - 5]
+            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]) <= now - relativedelta(years=4)]
+        elif Y_date == '五年及以上':
+            result_date = result_date[pd.to_datetime(result_date["本金结清日期/最近还款日期"]) <= now - relativedelta(years=5)]
 
         self.LSKH_result_data = result_date
 

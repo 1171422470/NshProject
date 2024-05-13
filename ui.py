@@ -315,7 +315,7 @@ class WinGUI(Tk):
         return btn
 
     def __tk_button_dk_f_button2(self, parent):
-        btn = Button(parent, text="2、2023年贷款客户资金归行情况分析", takefocus=False, )
+        btn = Button(parent, text="2、贷款客户资金归行情况分析", takefocus=False, )
         return btn
 
     def __tk_button_dk_f_button3(self, parent):
@@ -357,7 +357,7 @@ class WinGUI(Tk):
         return label
 
     def __tk_button_zjgh_button1(self, parent):
-        btn = Button(parent, text="1.导入2023年底贷款余额表（数据来源：ODS）", takefocus=False, )
+        btn = Button(parent, text="1.导入贷款余额表（数据来源：ODS）", takefocus=False, )
         return btn
 
     def __tk_button_zjgh_button2(self, parent):
@@ -406,7 +406,7 @@ class WinGUI(Tk):
 
     def __tk_select_box_lskh_select1(self, parent):
         cb = Combobox(parent, state="readonly", )
-        cb['values'] = ("一年及以上", "二年及以上", "三年及以上", "四年及以上", "五年")
+        cb['values'] = ("一年及以上", "二年及以上", "三年及以上", "四年及以上", "五年及以上")
         cb.set('一年及以上')
         return cb
 

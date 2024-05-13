@@ -20,8 +20,8 @@ class DKAnalysis:
         AJDK_import_file(self)
 
     # 按揭贷款数据分析
-    def DKAnalysis_AJDK_analyse_excel(self,Y_date):
-        AJDK_analyse_excel(self,Y_date)
+    def DKAnalysis_AJDK_analyse_excel(self, Y_date):
+        AJDK_analyse_excel(self, Y_date)
 
     # 按揭贷款分析结果导出
     def DKAnalysis_AJDK_export_file(self):
@@ -58,12 +58,13 @@ class DKAnalysis:
         LSKH_yjq_import_file(self)
 
     # 导入已结清数据源文件
-    def DKAnalysis_LSKH_analysis(self,Y_date):
-        LSKH_analysis(self,Y_date)
+    def DKAnalysis_LSKH_analysis(self, Y_date):
+        LSKH_analysis(self, Y_date)
 
     # 导出结果
     def DKAnalysis_LSKH_export(self):
         LSKH_export(self)
+
     # 贷款测算
     # 导入贷款余额表
     def DKAnalysis_DKCS_DKYEB_import_file(self):
@@ -80,6 +81,7 @@ class DKAnalysis:
     # 导出数据
     def DKAnalysis_DKCS_export_file(self):
         DKCS_export_file(self)
+
     def __init__(self, master):
         self.master = master
         # 按揭贷款数据分析
@@ -96,9 +98,8 @@ class DKAnalysis:
         # 近5年有贷款往来，现在已经结清了的客户
         self.LSKH_wjq_addr = ''  # 初始化未结清贷款明细路径
         self.LSKH_yjq_addr = ''  # 初始化已结清贷款明细路径
-        self.LSKH_result_data = 0   # 初始化生产的结果
+        self.LSKH_result_data = 0  # 初始化生产的结果
         # 贷款测算
         self.DKCS_dkyeb_addr = ''  # 初始化贷款余额表明细路径
         self.DKCS_dkhsdjb_addr = ''  # 初始化贷款回收登记簿路径
         self.LSKH_result_data = 0  # 初始化生产的结果
-
