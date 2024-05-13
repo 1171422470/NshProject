@@ -11,7 +11,7 @@ import datetime
 
 # 导入数据源文件
 def AJDK_import_file(self):
-    file_path = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("All files", "*.*")))
+    file_path = filedialog.askopenfilename(filetypes=(("Excel files", "*.xls"), ("All files", "*.*")))
 
     self.expth = file_path
 
@@ -19,12 +19,7 @@ def AJDK_import_file(self):
         messagebox.showinfo("Message", "未选中文件，请重新选择！")
         return False
     else:
-        data = pd.read_excel(self.expth, sheet_name=0, usecols='A:H, L, O:P, S', header=0, dtype=str).head(1)
-        if data.empty:
-            messagebox.showinfo("Message", "文件有误，请检查文件！")
-            return False
-        else:
-            messagebox.showinfo("Message", "选中：" + self.expth + "  请点击步骤2")
+        messagebox.showinfo("Message", "选中：" + self.expth + "  请点击步骤2")
 
 
 # 处理分析数据
