@@ -59,10 +59,9 @@ class ckAnalysis:
     def DQCKAnalysis(self,age_date):
         self.dataResult = self.DQCKdeal(self.expth, age_date)
         if self.dataResult is not None:
-            messagebox.showinfo("Message", "数据处理成功！")
-            self.str.set("恭喜!处理成功。点击步骤3，导出表格。")
+            messagebox.showinfo("Message", "数据处理完毕！点击步骤3，可以导出数据！")
         else:
-            self.str.set("处理失败！请重试或咨询技术人员。")
+            messagebox.showinfo("Message", "处理失败！请重试或咨询技术人员。")
 
     #定期存款数据处理
     def DQCKdeal(self,address,date):
@@ -104,15 +103,12 @@ class ckAnalysis:
                                                      aggfunc=sum)
         # 透视表进行合并,按个人汇总
         self.GR_result_hz = pd.pivot_table(self.result, index=["证件号码","开户机构","年龄","户名"],
-                                           values=["定期余额(大于5万元)"],
+                                           values=["账户余额(元)"],
                                            aggfunc=sum)
         # #判断文件是否导入
         if self.GR_result_hz is not None:
             return 1
-        if self.GR_result_hz is not None:
-            messagebox.showinfo("Message", "数据处理完毕！点击步骤3，可以导出数据！")
-        else:
-            messagebox.showinfo("Message", "处理失败！请重试或咨询技术人员。")
+
 
     # 根据身份证计算年龄
     def calculate_age_from_id_card(self,id_card):
@@ -138,9 +134,10 @@ class ckAnalysis:
         #     self.data_text.insert(tk.END, self.data_frame.to_string())
         self.expth = file_path
         if file_path == '':
-            self.str.set("未选中文件，请重新选择！")
+            messagebox.showinfo("Message", "未选中文件，请重新选择！")
+            return False
         else:
-            self.str.set("选中：" + file_path + "   点击步骤2，请耐心等待。。。")
+            messagebox.showinfo("Message", "选中：" + file_path + "  请点击步骤2")
 
     # 数据导出,导出格式为Excel
     def export_file(self):

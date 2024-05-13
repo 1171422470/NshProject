@@ -3,7 +3,7 @@ from tkinter import filedialog
 import pandas as pd
 from tkinter import ttk
 from tkinter import messagebox
-
+import xlrd
 
 # 贷款存款余额数据分析
 def ZJGH_dk_ck_file_analyse(self):

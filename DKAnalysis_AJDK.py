@@ -4,6 +4,7 @@ import pandas as pd
 from tkinter import ttk
 from tkinter import messagebox
 import datetime
+import xlrd
 
 
 # 是否成功标识，0正在处理，1处理成功，-1处理失败

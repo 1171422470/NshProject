@@ -5,6 +5,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import datetime
 import string
+import xlrd
 
 
 # 1、余额占比=区间贷款余额/各项贷款余额
