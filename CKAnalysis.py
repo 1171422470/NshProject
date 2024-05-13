@@ -89,7 +89,7 @@ class ckAnalysis:
                                & (data['账户余额(元)'] > 50000)]
         elif date == '60周岁以上':
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
-            self.result = data[data['年龄'] > 60 &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
+            self.result = data[(data['年龄'] > 60) & ((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
 
