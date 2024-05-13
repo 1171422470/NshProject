@@ -88,7 +88,7 @@ class ckAnalysis:
             self.result = data[(data['年龄'] >= 40) & (data['年龄'] <= 60) &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
                                & (data['账户余额(元)'] > 50000)]
-        else:
+        elif date == '60周岁以上':
             data['年龄'] = data['证件号码'].apply(self.calculate_age_from_id_card)
             self.result = data[data['年龄'] > 60 &((data['科目编码'] == 20040101) | (data['科目编码'] == 20040102)| (data['科目编码'] == 20040103)
             | (data['科目编码'] == 20040104) | (data['科目编码'] == 20040105) | (data['科目编码'] == 20040106))
@@ -109,6 +109,10 @@ class ckAnalysis:
         # #判断文件是否导入
         if self.GR_result_hz is not None:
             return 1
+        if self.GR_result_hz is not None:
+            messagebox.showinfo("Message", "数据处理完毕！点击步骤3，可以导出数据！")
+        else:
+            messagebox.showinfo("Message", "处理失败！请重试或咨询技术人员。")
 
     # 根据身份证计算年龄
     def calculate_age_from_id_card(self,id_card):
@@ -136,7 +140,7 @@ class ckAnalysis:
         if file_path == '':
             self.str.set("未选中文件，请重新选择！")
         else:
-            self.str.set("选中：" + self.expth + "   点击步骤2，请耐心等待。。。")
+            self.str.set("选中：" + file_path + "   点击步骤2，请耐心等待。。。")
 
     # 数据导出,导出格式为Excel
     def export_file(self):

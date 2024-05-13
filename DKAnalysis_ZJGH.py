@@ -7,8 +7,6 @@ from tkinter import messagebox
 
 # 贷款存款余额数据分析
 def ZJGH_dk_ck_file_analyse(self):
-    messagebox.showinfo("Message", "点击确定，开始分析数据！数据量较大，可能需要几分钟！")
-
     # 获取2023年12月底贷款数据，使用B-J列
     dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:G, J, P', header=4,
                                 dtype=str, keep_default_na=False)

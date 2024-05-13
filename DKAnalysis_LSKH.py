@@ -37,7 +37,6 @@ def LSKH_yjq_import_file(self):
 
 # 分析数据
 def LSKH_analysis(self,Y_date):
-    # 清空页面
     if self.LSKH_wjq_addr == '':
         messagebox.showinfo("Message", "未选中文件，请点击步骤2！")
         return None
