@@ -8,7 +8,7 @@ import xlrd
 # 贷款存款余额数据分析
 def ZJGH_dk_ck_file_analyse(self):
     # 获取2023年12月底贷款数据，使用B-J列
-    dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:G, J, P', header=4,
+    dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:G, J, P,AA', header=4,
                                 dtype=str, keep_default_na=False)
     # 删除不需要的列
     dk202312_df.drop([len(dk202312_df) - 1], inplace=True)

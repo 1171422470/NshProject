@@ -29,7 +29,7 @@ def AJDK_analyse_excel(self, Y_date):
         messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
         return None
     else:
-        data = pd.read_excel(self.expth, sheet_name=0, usecols='A:H, L, O:P, S', header=0, dtype=str)
+        data = pd.read_excel(self.expth, sheet_name=0, usecols='A:H, L, O:P, S,', header=0, dtype=str)
         # 贷款形态为正常
         data = data[data["五级分类状态"] == "1-正常"]
         # 剔除无用数据

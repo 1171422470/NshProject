@@ -57,11 +57,16 @@ class ckAnalysis:
         # export_button.pack(padx=10, pady=10, anchor='nw')
     # 定期存款数据分析
     def DQCKAnalysis(self,age_date):
-        self.dataResult = self.DQCKdeal(self.expth, age_date)
-        if self.dataResult is not None:
-            messagebox.showinfo("Message", "数据处理完毕！点击步骤3，可以导出数据！")
+        if self.expth == '':
+            messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
+            return None
         else:
-            messagebox.showinfo("Message", "处理失败！请重试或咨询技术人员。")
+            messagebox.showinfo("Message", "正在处理，请耐心等待！")
+            self.dataResult = self.DQCKdeal(self.expth, age_date)
+            if self.dataResult is not None:
+                messagebox.showinfo("Message", "数据处理完毕！点击步骤3，可以导出数据！")
+            else:
+                messagebox.showinfo("Message", "处理失败！请重试或咨询技术人员。")
 
     #定期存款数据处理
     def DQCKdeal(self,address,date):
