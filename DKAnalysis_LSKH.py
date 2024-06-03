@@ -45,10 +45,8 @@ def LSKH_analysis(self,Y_date):
         messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
         return None
     else:
-        wjq_data = pd.read_excel(self.LSKH_wjq_addr, sheet_name=0, usecols='A, C:E, G:H, J, L, O:Q, S, V',
-                                 header=0, dtype=str)
-        yjq_data = pd.read_excel(self.LSKH_yjq_addr, sheet_name=0, usecols='A, C:E, G:H, J, L, O:Q, S, V',
-                                 header=0, dtype=str)
+        wjq_data = pd.read_excel(self.LSKH_wjq_addr, sheet_name=0,header=0, dtype=str)
+        yjq_data = pd.read_excel(self.LSKH_yjq_addr, sheet_name=0,header=0, dtype=str)
         # 获取当前时间
         now = datetime.datetime.now()
         # 删除为空的数据
@@ -98,6 +96,10 @@ def LSKH_export(self):
     else:
         writer = pd.ExcelWriter(export_path, engine='openpyxl')
         # 导出明细表格
+        #选取指定列
+        col = ['机构名称','客户名称','注册号码','贷款金额','贷款日期','到期日期','贷款到期前利率 %','五级分类状态','主客户经理',
+               '第一责任人','行政村组','联系电话','本金结清日期/最近还款日期']
+        self.LSKH_result_data = self.LSKH_result_data.loc[:,col]
         df1 = pd.DataFrame(self.LSKH_result_data)
         df1.to_excel(writer, sheet_name='明细', index=False)
         # 计算客户户数

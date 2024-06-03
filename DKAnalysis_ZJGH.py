@@ -7,17 +7,18 @@ import xlrd
 
 # 贷款存款余额数据分析
 def ZJGH_dk_ck_file_analyse(self):
-    # 获取2023年12月底贷款数据，使用B-J列
-    dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, usecols='B:G, J, P,AA', header=4,
+    # 获取2023年12月底贷款数据
+    dk202312_df = pd.read_excel(self.dk202312, sheet_name=0, header=4,
                                 dtype=str, keep_default_na=False)
+    # 删掉贷款数据中的年平均字段，避免与存款数据中的字段重叠
+    del dk202312_df['年平均']
     # 删除不需要的列
     dk202312_df.drop([len(dk202312_df) - 1], inplace=True)
     # 删除重复行
     # dk202312_1 = dk202312_df.drop_duplicates("证件号码", keep='first', inplace=False)
-    # 获取2023年12月底存款数据，使用F-Q列
-    ck202312_df = pd.read_excel(self.ck202312, sheet_name=0, usecols='F, Q', header=1,
+    # 获取2023年12月底存款数据
+    ck202312_df = pd.read_excel(self.ck202312, sheet_name=0, header=1,
                                 dtype={'证件号码': str, '年平均': object})
-
     # 202312底存款按证件号得到一个透视表
     ck202312_1 = pd.pivot_table(ck202312_df, index=["证件号码"], values=["年平均"], aggfunc=sum)
     # 合并2023年底存款和贷款表
@@ -27,8 +28,8 @@ def ZJGH_dk_ck_file_analyse(self):
     # dk_now_df = pd.read_excel(self.dk_now, sheet_name=0, usecols='B:D', header=4, dtype={'证件号码': str},
     #                           keep_default_na=False)
     # dk_now_1 = dk_now_df.drop_duplicates("证件号码", keep='first', inplace=False)
-    # 获取当前存款数据，使用F-Q列
-    ck_now_df = pd.read_excel(self.ck_now, sheet_name=0, usecols='F, Q', header=1,
+    # 获取当前存款数据
+    ck_now_df = pd.read_excel(self.ck_now, sheet_name=0, header=1,
                               dtype={'证件号码': str, '年平均': object})
     # 当前存款按证件号得到一个透视表
     ck_now_1 = pd.pivot_table(ck_now_df, index=["证件号码"], values=["年平均"], aggfunc=sum).rename \
@@ -46,6 +47,9 @@ def ZJGH_dk_ck_file_analyse(self):
     # 明细表
     self.ck_dk_202312_result_mx = dk_2023_now_final_df
     self.ck_dk_202312_result_mx.sort_values(by=['开户机构', '证件号码'], inplace=True, ascending=True)  # 按照证件号排序
+    #选取指定列
+    col = ['开户机构','户名','证件号码','贷款账号','借款日期','到期日期','贷款余额(元)','2023年底存款年平均','当前存款年平均','差值']
+    self.ck_dk_202312_result_mx = self.ck_dk_202312_result_mx.loc[:,col]
     # 汇总表
     data_tmp = dk_2023_now_final_df.drop_duplicates("证件号码", keep='first', inplace=False)  # 删除重复项
     self.ck_dk_202312_result_hz = pd.pivot_table(data_tmp, index=["开户机构"],

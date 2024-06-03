@@ -29,7 +29,7 @@ def AJDK_analyse_excel(self, Y_date):
         messagebox.showinfo("Message", "未选中文件，请点击步骤1！")
         return None
     else:
-        data = pd.read_excel(self.expth, sheet_name=0, usecols='A:H, L, O:P, S,', header=0, dtype=str)
+        data = pd.read_excel(self.expth, sheet_name=0, header=0, dtype=str)
         # 贷款形态为正常
         data = data[data["五级分类状态"] == "1-正常"]
         # 剔除无用数据
@@ -72,6 +72,10 @@ def AJDK_export_file(self):
     else:
         writer = pd.ExcelWriter(export_path, engine='openpyxl')
         # 导出明细表格
+        #选取指定数据列
+        col = ['机构名称','贷款帐号','客户名称','注册号码','贷款金额','本金余额','可用贷款余额','到期日期','五级分类状态','第一责任人'
+               ,'联系电话']
+        self.AJDK_dataResult = self.AJDK_dataResult.loc[:,col]
         df1 = pd.DataFrame(self.AJDK_dataResult)
         df1.to_excel(writer, sheet_name='明细', index=False)
         # 计算客户户数
